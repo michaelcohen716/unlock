@@ -1,5 +1,52 @@
 /* eslint no-console: 0 */
 
+/**
+ * debugPage [local dev only]
+ *
+ * Use debugPage() to display the output of console.log from within the page context.
+ * It should be called at the point you would like logging to begin with:
+ *
+ * debugPage(page, true)
+ *
+ * ****************************
+ * screenshot [local or CI dev]
+ *
+ * screenshot() will immediately take a screenshot and save it. It accepts
+ * an optional filename prefix, which defaults to 'test'. With each call to
+ * screenshot, the file generated has a unique name based on a counter. The
+ * counter increments every time screenshot is called regardless of the filename
+ * prefix. These calls:
+ *
+ * screenshot(page)
+ * screenshot(page, 'different')
+ * screenshot(page)
+ *
+ * will generate files '/screenshots/test-1.png', '/screenshots/different-2.png', and
+ * '/screenshots/test-3.png'
+ *
+ * screenshot can be used either in development or production. Be aware that on Mac
+ * OS X screenshots take a minimum of 1/6 second, and can distort timing results, so
+ * should only be used for development of integration tests.
+ *
+ * screenshots are saved into /tmp/screenshots
+ *
+ * ****************************
+ * screenshotOnFail [local and CI]
+ *
+ * screenshotOnFail() is designed to be a replacement for jest's "it"
+ * that is used to take a screenshot on any test failure. It is a factory
+ * that returns the replacement for "it." Usage:
+ *
+ * const it = screenshotOnFail(page)
+ *
+ * Note that there is no requirement that it replace "it", and one could just as easily use:
+ *
+ * const itWithScreenshot = screenshotOnFail(page)
+ *
+ * screenshots are saved into /tmp/screenshots for local dev, and will appear on CircleCI
+ * in the Artifacts section of integration tests for viewing when the tests conplete.
+ * Screenshot names are based on the test description.
+ */
 let counter = 1
 module.exports = {
   debugPage(page, debug = false) {
