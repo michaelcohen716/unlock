@@ -39,7 +39,7 @@
   "scripts": {
     "link-parent-bin": "link-parent-bin -c . -s true",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-ganache": "ganache-cli -i 1984 --mnemonic 'hello unlock save the web' -k petersburg",
+    "start-ganache": "ganache-cli -i 1984 --mnemonic 'hello unlock save the web'",
     "postinstall": "./scripts/postinstall.sh",
     "build": "cd smart-contracts && npm run build && cd ../unlock-app && npm run build && cd ../locksmith && npm run build",
     "start": "./scripts/start.sh",
