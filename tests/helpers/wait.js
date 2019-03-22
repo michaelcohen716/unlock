@@ -1,3 +1,4 @@
+const debugPage = require('./debugging').debugPage
 /**
  * Helper function which waits for something to be false
  */
@@ -28,8 +29,17 @@ const untilIsGone = async selector =>
  */
 const forLoadingDone = async () => untilIsGone('svg[alt="loading"]')
 
+const forIframe = async () => {
+  debugPage(page, true)
+  return page.waitForFunction(() => {
+    console.log(`window.frames.length: ${window.frames.length}`)
+    return window.frames.length
+  })
+}
+
 module.exports = {
   untilIsFalse,
   untilIsGone,
   forLoadingDone,
+  forIframe,
 }
