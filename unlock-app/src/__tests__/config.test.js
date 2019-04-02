@@ -3,6 +3,9 @@ import {
   CANONICAL_BASE_DEV_URL,
   CANONICAL_BASE_STAGING_URL,
   CANONICAL_BASE_URL,
+  CANONICAL_STATIC_URL,
+  CANONICAL_STATIC_DEV_URL,
+  CANONICAL_STATIC_STAGING_URL,
 } from '../constants'
 
 describe('config', () => {
@@ -111,8 +114,9 @@ describe('config', () => {
     })
 
     it('should contain the right fallback url', () => {
-      expect.assertions(1)
+      expect.assertions(2)
       expect(config.unlockUrl).toEqual(CANONICAL_BASE_DEV_URL)
+      expect(config.unlockStaticUrl).toEqual(CANONICAL_STATIC_DEV_URL)
     })
 
     it('should have the right keys in dev when there is a web3 provider', () => {
@@ -192,8 +196,9 @@ describe('config', () => {
     })
 
     it('should contain the right fallback URL', () => {
-      expect.assertions(1)
+      expect.assertions(2)
       expect(config.unlockUrl).toEqual(CANONICAL_BASE_STAGING_URL)
+      expect(config.unlockStaticUrl).toEqual(CANONICAL_STATIC_STAGING_URL)
     })
   })
 
@@ -225,9 +230,10 @@ describe('config', () => {
       )
     })
 
-    it('should contain the right fallback URL', () => {
-      expect.assertions(1)
+    it('should contain the right fallback URLs', () => {
+      expect.assertions(2)
       expect(config.unlockUrl).toEqual(CANONICAL_BASE_URL)
+      expect(config.unlockStaticUrl).toEqual(CANONICAL_STATIC_URL)
     })
   })
 })

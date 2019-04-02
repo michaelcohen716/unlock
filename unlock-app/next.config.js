@@ -23,6 +23,9 @@ let requiredConfigVariables = {
 if (process.env.UNLOCK_URL)
   requiredConfigVariables.unlockUrl = process.env.UNLOCK_URL
 
+if (process.env.UNLOCK_STATIC_URL)
+  requiredConfigVariables.unlockStaticUrl = process.env.UNLOCK_STATIC_URL
+
 Object.keys(requiredConfigVariables).forEach(configVariableName => {
   if (!requiredConfigVariables[configVariableName]) {
     if (requiredConfigVariables.unlockEnv === 'test') return
@@ -64,12 +67,8 @@ module.exports = withTypescript({
     // Our statically-defined pages to export
     return {
       '/': { page: '/home' },
-      '/about': { page: '/about' },
-      '/jobs': { page: '/jobs' },
       '/dashboard': { page: '/dashboard' },
       '/keychain': { page: '/keyChain' },
-      '/terms': { page: '/terms' },
-      '/privacy': { page: '/privacy' },
       '/log': { page: '/log' },
     }
   },

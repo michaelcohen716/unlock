@@ -4,6 +4,9 @@ import {
   CANONICAL_BASE_DEV_URL,
   CANONICAL_BASE_STAGING_URL,
   CANONICAL_BASE_URL,
+  CANONICAL_STATIC_DEV_URL,
+  CANONICAL_STATIC_STAGING_URL,
+  CANONICAL_STATIC_URL,
   ETHEREUM_NETWORKS_NAMES,
 } from './constants'
 
@@ -91,6 +94,8 @@ export default function configure(
     etherScan: () => '',
   }
   let unlockUrl = runtimeConfig.unlockUrl || CANONICAL_BASE_DEV_URL
+  let unlockStaticUrl =
+    runtimeConfig.unlockStaticUrl || CANONICAL_STATIC_DEV_URL
 
   services['currencyPriceLookup'] =
     'https://api.coinbase.com/v2/prices/ETH-USD/buy'
@@ -124,6 +129,8 @@ export default function configure(
     }
 
     if (!runtimeConfig.unlockUrl) unlockUrl = CANONICAL_BASE_DEV_URL
+    if (!runtimeConfig.unlockStaticUrl)
+      unlockStaticUrl = CANONICAL_STATIC_DEV_URL
 
     supportedProviders = ['HTTP']
 
@@ -160,6 +167,8 @@ export default function configure(
       runtimeConfig.paywallScriptUrl ||
       'https://staging-paywall.unlock-protocol.com/static/paywall.min.js'
     if (!runtimeConfig.unlockUrl) unlockUrl = CANONICAL_BASE_STAGING_URL
+    if (!runtimeConfig.unlockStaticUrl)
+      unlockStaticUrl = CANONICAL_STATIC_STAGING_URL
 
     // Address for the Unlock smart contract
     unlockAddress = '0xD8C88BE5e8EB88E38E6ff5cE186d764676012B0b'
@@ -193,6 +202,7 @@ export default function configure(
       runtimeConfig.paywallScriptUrl ||
       'https://paywall.unlock-protocol.com/static/paywall.min.js'
     if (!runtimeConfig.unlockUrl) unlockUrl = CANONICAL_BASE_URL
+    if (!runtimeConfig.unlockStaticUrl) unlockStaticUrl = CANONICAL_STATIC_URL
 
     // Address for the Unlock smart contract
     unlockAddress = '0x3d5409CcE1d45233dE1D4eBDEe74b8E004abDD13'
@@ -227,6 +237,7 @@ export default function configure(
     paywallScriptUrl,
     supportedProviders,
     unlockUrl,
+    unlockStaticUrl,
     chainExplorerUrlBuilders,
   }
 }
