@@ -271,14 +271,16 @@ jobs:
     steps:
       - *cached-checkout
       - run:
-          name: Set GIT_COMMIT_DESC
-          command: echo 'export GIT_COMMIT_DESC=$(git log --format=%B -n 1 "$CIRCLE_SHA1")' >> $BASH_ENV
-      - run:
-          name: Set IS_FORKED_PR
-          command: ./scripts/circleci/set-is-forked-pull-request.sh >> $BASH_ENV
+          name: Installing deployment dependencies
+          working_directory: /
+          command: |
+            sudo apt-get -y -qq update
+            sudo apt-get install python-pip python-dev build-essential
+            sudo pip install --upgrade setuptools
+            sudo pip install awsebcli --upgrade
       - run:
           name: Deploy to to Beanstalk
-          command: locksmith/scripts/deploy-elasticbeanstalk.sh "$CIRCLE_SHA1" "$CIRCLE_BRANCH" "$IS_FORKED_PR" "$GIT_COMMIT_DESC"
+          command: locksmith/scripts/deploy-eb-docker.sh
 
   promote-unlock-image:
     machine: true
@@ -392,9 +394,6 @@ workflows:
             - wedlocks-tests
             - integration-tests
       - deploy-locksmith-beanstalk:
-          filters:
-            branches:
-              only: master
           requires:
             - unlock-protocol-com-tests
             - unlock-app-tests
