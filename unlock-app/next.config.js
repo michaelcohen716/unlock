@@ -17,14 +17,12 @@ let requiredConfigVariables = {
   locksmithHost: process.env.LOCKSMITH_URI || 'http://127.0.0.1:8080',
   unlockAddress:
     process.env.UNLOCK_ADDRESS || '0x885EF47c3439ADE0CB9b33a4D3c534C99964Db93', // default for CI
+  unlockStaticUrl: process.env.UNLOCK_STATIC_URL,
 }
 
 // If the URL is set in an env variable, use it - otherwise it'll be overridden in config.js
 if (process.env.UNLOCK_URL)
   requiredConfigVariables.unlockUrl = process.env.UNLOCK_URL
-
-if (process.env.UNLOCK_STATIC_URL)
-  requiredConfigVariables.unlockStaticUrl = process.env.UNLOCK_STATIC_URL
 
 Object.keys(requiredConfigVariables).forEach(configVariableName => {
   if (!requiredConfigVariables[configVariableName]) {
